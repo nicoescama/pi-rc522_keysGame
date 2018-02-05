@@ -7,7 +7,7 @@ import sys
 from pirc522 import RFID
 
 run = True
-sector = 9
+sector = 11
 lector=RFID()
 util=lector.util()
 bloque = util.block_addr(sector, 0)
@@ -64,13 +64,12 @@ while run:
 		  if len(nombreList)==8:
 			  try:
 			     for i in range(0,len(nombreList)):
-					 print(i)
-					 data.append(int(nombreList[i],16))
+  				    data.append(int(nombreList[i],16))
 			  except ValueError:
-				    print "Error de formato"
-				    continue
+				 print "Error de formato"
+				 continue
 		  else:
-				print "Error de formato"
+				print "Escribe 8 numeros hexa separados por coma"
 				continue
 		  print(len(data))
 		  util.auth(lector.auth_a, [0x44,0x41,0x4A,0x47,0x4E,0x45])
@@ -79,6 +78,8 @@ while run:
 		  if not fallo:
 			  print("etiqueta marcada correctamente")
 			  sys.exit()
+		  else:
+			  print("Hubo un error al nombrar, vuelve a empezar")
 		  
 		 
 		 
